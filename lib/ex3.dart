@@ -1,8 +1,5 @@
-import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const ProductsApp());
-}
+import 'package:flutter/material.dart';
 
 enum Product {
   dart(
@@ -32,50 +29,10 @@ enum Product {
   final String image;
 }
 
-class ProductsApp extends StatelessWidget {
-  const ProductsApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Products',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
-        useMaterial3: true,
-      ),
-      home: const ProductsPage(),
-    );
-  }
-}
-
-class ProductsPage extends StatelessWidget {
-  const ProductsPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Products')),
-      body: Container(
-        color: Colors.blue,
-        padding: const EdgeInsets.all(16),
-        child: const Column(
-          children: [
-            ProductCard(product: Product.dart),
-            SizedBox(height: 10),
-            ProductCard(product: Product.flutter),
-            SizedBox(height: 10),
-            ProductCard(product: Product.firebase),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
 class ProductCard extends StatelessWidget {
-  const ProductCard({super.key, required this.product});
-
   final Product product;
+
+  const ProductCard({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
@@ -86,11 +43,39 @@ class ProductCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Image.asset(product.image, height: 72),
-            Text(product.title, style: const TextStyle(fontSize: 24)),
-            Text(product.description, style: const TextStyle(fontSize: 12)),
+            Text(
+              product.title,
+              style: const TextStyle(fontSize: 24),
+            ),
+            Text(
+              product.description,
+              style: const TextStyle(fontSize: 12),
+            ),
           ],
         ),
       ),
     );
   }
+}
+
+void main() {
+  runApp(
+    MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        appBar: AppBar(title: const Text('Products')),
+        body: Container(
+          color: Colors.blue,
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            children: [
+              ProductCard(product: Product.dart),
+              ProductCard(product: Product.flutter),
+              ProductCard(product: Product.firebase),
+            ],
+          ),
+        ),
+      ),
+    ),
+  );
 }
